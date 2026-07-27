@@ -232,7 +232,7 @@ La comunicación con MySQL se realiza mediante:
 
 ### Historial de préstamos
 
-![Historial de préstamos](./screenshots/historial-prestamos.png)
+![Historial de préstamos](./screenshots/historialPrestamos.png)
 
 ## Autor
 
