@@ -3,6 +3,7 @@
 CREATE DATABASE IF NOT EXISTS biblioteca;
 USE biblioteca;
 
+
 -- Tabla de Libros
 CREATE TABLE IF NOT EXISTS libros (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -10,8 +11,10 @@ CREATE TABLE IF NOT EXISTS libros (
     autor VARCHAR(255) NOT NULL,
     isbn VARCHAR(20) UNIQUE,
     cantidad INT DEFAULT 1,
+    activo TINYINT(1) DEFAULT 1,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
 
 -- Tabla de Usuarios
 CREATE TABLE IF NOT EXISTS usuarios (
@@ -19,8 +22,10 @@ CREATE TABLE IF NOT EXISTS usuarios (
     nombre VARCHAR(255) NOT NULL,
     email VARCHAR(255) UNIQUE NOT NULL,
     telefono VARCHAR(20),
+    activo TINYINT(1) DEFAULT 1,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
 
 -- Tabla de Préstamos
 CREATE TABLE IF NOT EXISTS prestamos (
@@ -30,6 +35,12 @@ CREATE TABLE IF NOT EXISTS prestamos (
     fecha_prestamo DATE NOT NULL,
     fecha_devolucion DATE,
     estado ENUM('activo', 'devuelto') DEFAULT 'activo',
-    FOREIGN KEY (libro_id) REFERENCES libros(id),
-    FOREIGN KEY (usuario_id) REFERENCES usuarios(id)
+
+    FOREIGN KEY (libro_id) 
+        REFERENCES libros(id)
+        ON DELETE RESTRICT,
+
+    FOREIGN KEY (usuario_id) 
+        REFERENCES usuarios(id)
+        ON DELETE RESTRICT
 );

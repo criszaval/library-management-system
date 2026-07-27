@@ -1,53 +1,245 @@
-# Tarea: Sistema de Gestión de Biblioteca (Mini-Aplicación OOP)
+# Sistema de Gestión de Biblioteca
 
-## Objetivo
-Completar la implementación de un sistema de gestión de biblioteca utilizando PHP y Programación Orientada a Objetos (OOP). Se te proporciona la estructura base de archivos y clases. Tu misión es rellenar la lógica faltante.
+## Descripción
 
-## Configuración Inicial
+Sistema de gestión de biblioteca desarrollado en PHP utilizando Programación Orientada a Objetos (OOP).
 
-1.  **Base de Datos**:
-    *   Abre tu gestor de base de datos (phpMyAdmin, MySQL Workbench, etc.).
-    *   Importa o ejecuta el script SQL contenido en el archivo `biblioteca.sql`.
-    *   Esto creará la base de datos `biblioteca` y las tablas necesarias (`libros`, `usuarios`, `prestamos`).
+La aplicación permite administrar libros, usuarios y préstamos mediante operaciones CRUD, además de controlar automáticamente la disponibilidad de los libros al realizar préstamos y devoluciones.
 
-2.  **Servidor Local**:
-    *   Asegúrate de ejecutar este proyecto dentro de un servidor local (como XAMPP, Laragon, o el servidor integrado de PHP).
+El proyecto fue desarrollado como una mini aplicación web utilizando PHP, MySQL y PDO.
 
-## Instrucciones de Implementación
+## Tecnologías utilizadas
 
-Busca los comentarios `// TODO` en los archivos para saber exactamente qué implementar. Se recomienda seguir este orden:
+- PHP 8+
+- MySQL
+- PDO para conexión a base de datos
+- HTML5
+- CSS3
+- XAMPP
 
-### Paso 1: Conexión a Base de Datos
-**Archivo:** `classes/Database.php`
-*   Implementa el método `getConnection()` para retornar una conexión PDO válida a la base de datos `biblioteca`.
-*   Asegúrate de que las credenciales (usuario/password) coincidan con tu configuración local.
+## Estructura del proyecto
 
-### Paso 2: Clases de Modelo
-**Archivos:** `classes/Libro.php`, `classes/Usuario.php`, `classes/Prestamo.php`
-*   Completa los **constructores** para inicializar los atributos de la clase.
-*   Implementa todos los métodos **Getters** y **Setters** para cada propiedad privada.
+C:\
+└── xampp\
+    └── htdocs\
+        └── library-management-system\
+            │
+            ├── classes\
+            │   ├── Biblioteca.php
+            │   ├── Database.php
+            │   ├── Libro.php
+            │   ├── Prestamo.php
+            │   └── Usuario.php
+            │
+            ├── views\
+            │   ├── libros\
+            │   │   └── formulario.php
+            │   │
+            │   ├── usuarios\
+            │   │   └── formulario.php
+            │   │
+            │   └── prestamos\
+            │       └── formulario.php
+            │
+            ├── screenshots\
+            │   ├── crearLibro.png
+            │   ├── crearPrestamo.png
+            │   ├── crearUsuario.png
+            │   ├── editarLibro.png
+            │   ├── editarUsuario.png
+            │   ├── historial-prestamos.png
+            │   ├── libros.png
+            │   ├── prestamosActivos.png
+            │   └── usuarios.png
+            │
+            ├── biblioteca.sql
+            ├── index.php
+            ├── README.md
+            └── .gitignore
 
-### Paso 3: Lógica de Negocio (Gestor)
-**Archivo:** `classes/Biblioteca.php`
-Esta clase centraliza la funcionalidad. Debes implementar:
-*   **Constructor**: Inicializar la conexión a la base de datos usando la clase `Database`.
-*   **CRUD de Libros**: Métodos `agregarLibro`, `editarLibro`, `eliminarLibro`, `obtenerLibros`.
-*   **CRUD de Usuarios**: Métodos `agregarUsuario`, `editarUsuario`, `eliminarUsuario`, `obtenerUsuarios`.
-*   **Gestión de Préstamos**:
-    *   `prestarLibro($libro_id, $usuario_id)`: Debe crear el registro en la tabla `prestamos` Y disminuir el campo `cantidad` en la tabla `libros`.
-    *   `devolverLibro($prestamo_id)`: Debe actualizar la `fecha_devolucion` y `estado` en `prestamos`, Y aumentar el campo `cantidad` en la tabla `libros`.
 
-### Paso 4: Interfaz de Usuario
-**Archivo:** `index.php`
-*   Implementa la lógica para recibir parámetros (por ejemplo `?action=crear_libro`) y llamar a los métodos correspondientes de la clase `Biblioteca`.
-*   Diseña la interfaz HTML para:
-    *   Listar libros, usuarios y préstamos activos.
-    *   Formularios para agregar nuevos libros y usuarios.
-    *   Botones/Enlaces para "Prestar", "Devolver", "Editar" y "Eliminar".
+## Instalación y configuración
 
-## Requisitos
-*   El código debe ser limpio y ordenado.
-*   La lógica de negocio debe estar encapsulada en las clases, no en la vista (`index.php` debe usarse principalmente para mostrar datos y capturar input).
-*   No es necesario un sistema de login/autenticación.
+### Requisitos
 
-¡Mucho éxito con tu implementación!
+- PHP 8 o superior
+- MySQL
+- XAMPP, Laragon o cualquier servidor local
+- Navegador web
+
+### Clonar el repositorio
+
+
+git clone https://github.com/criszaval/library-management-system.git
+
+
+
+
+### Colocar el proyecto en el servidor
+
+Si utilizas XAMPP, copia la carpeta del proyecto dentro de:
+
+
+C:\xampp\htdocs\
+
+
+Debe quedar así:
+
+
+C:\xampp\htdocs\library-management-system\
+
+
+### Crear la base de datos
+
+Abre phpMyAdmin e importa el archivo:
+
+
+biblioteca.sql
+
+
+Este archivo crea automáticamente:
+
+- Base de datos `biblioteca`
+- Tabla `libros`
+- Tabla `usuarios`
+- Tabla `prestamos`
+
+### Configurar la conexión
+
+Edita el archivo:
+
+
+classes/Database.php
+
+
+Verifica las credenciales:
+
+
+private $host = "localhost";
+private $db = "biblioteca";
+private $user = "root";
+private $password = "";
+
+
+### Ejecutar el proyecto
+
+Abre en el navegador:
+
+
+http://localhost/library-management-system/
+
+
+## Funcionalidades
+
+### Gestión de libros
+
+- Registrar libros.
+- Editar libros.
+- Eliminar libros.
+- Consultar libros.
+- Controlar la cantidad disponible.
+
+### Gestión de usuarios
+
+- Registrar usuarios.
+- Editar usuarios.
+- Eliminar usuarios.
+- Consultar usuarios registrados.
+
+### Gestión de préstamos
+
+- Registrar préstamos.
+- Asociar libros con usuarios.
+- Disminuir automáticamente la cantidad disponible del libro.
+- Registrar devoluciones.
+- Actualizar nuevamente la cantidad disponible.
+
+### Historial de préstamos
+
+Permite consultar:
+
+- Libros prestados.
+- Usuarios asociados.
+- Fecha del préstamo.
+- Fecha de devolución.
+- Estado del préstamo.
+
+Estados disponibles:
+
+- Activo
+- Devuelto
+
+## Arquitectura
+
+El sistema está desarrollado utilizando Programación Orientada a Objetos (OOP).
+
+### Modelos
+
+- Libro
+- Usuario
+- Prestamo
+
+### Clase Biblioteca
+
+La clase `Biblioteca` centraliza la lógica del sistema:
+
+- Operaciones CRUD.
+- Gestión de préstamos.
+- Actualización del inventario.
+- Consultas a la base de datos.
+
+### Base de datos
+
+La comunicación con MySQL se realiza mediante:
+
+- PDO.
+- Consultas preparadas.
+- Parámetros enlazados (Bind Parameters).
+
+## Capturas del sistema
+
+### Vista principal de libros
+
+![Vista de libros](./screenshots/libros.png)
+
+### Registrar libro
+
+![Registrar libro](./screenshots/crearLibro.png)
+
+### Editar libro
+
+![Editar libro](./screenshots/editarLibro.png)
+
+### Vista de usuarios
+
+![Vista de usuarios](./screenshots/usuarios.png)
+
+### Registrar usuario
+
+![Registrar usuario](./screenshots/crearUsuario.png)
+
+### Editar usuario
+
+![Editar usuario](./screenshots/editarUsuario.png)
+
+### Registrar préstamo
+
+![Registrar préstamo](./screenshots/crearPrestamo.png)
+
+### Préstamos activos
+
+![Préstamos activos](./screenshots/prestamosActivos.png)
+
+### Historial de préstamos
+
+![Historial de préstamos](./screenshots/historial-prestamos.png)
+
+## Autor
+
+Cristofer Zavala
+
+Proyecto académico desarrollado como práctica de Programación Orientada a Objetos utilizando PHP, MySQL y PDO.
+
+## Licencia
+
+Este proyecto fue desarrollado con fines educativos.
